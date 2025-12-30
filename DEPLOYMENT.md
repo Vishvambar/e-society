@@ -1,18 +1,24 @@
-# Deployment Guide (Vercel)
+# Deployment Guide
 
-This project is ready for deployment. Follow these steps:
+This project is ready for deployment on Vercel.
 
-1.  **Push to GitHub**: Ensure your latest code is pushed to your repository.
-2.  **Import to Vercel**: 
-    - Go to Vercel Dashboard -> Add New -> Project.
-    - Import your repository.
-3.  **Environment Variables**:
-    - In the Vercel Project Settings, add the following variables:
-        - `MONGODB_URI`: Your MongoDB connection string (e.g., from MongoDB Atlas).
-        - `JWT_SECRET`: A long, secure random string for signing tokens.
-4.  **Deploy**: Click Deploy.
+## Environment Variables
+You MUST configure the following environment variables in your Vercel Project Settings:
 
-## Troubleshooting
-- If the build fails on database connection, ensure `MONGODB_URI` is set in Vercel.
-- If images break, ensure they are in `public/` folder.
-- If you see "500 Internal Server Error", check Vercel Logs (usually missing env vars).
+1.  **MONGODB_URI**: Your MongoDB connection string.
+    *   Example: `mongodb+srv://user:pass@cluster.mongodb.net/dbname`
+    *   *Note: Ensure "Access from anywhere" (0.0.0.0/0) is enabled in MongoDB Atlas Network Access, as Vercel IP addresses are dynamic.*
+
+2.  **JWT_SECRET**: A strong random string for signing tokens.
+    *   You can generate one using: `openssl rand -base64 32`
+
+## Deployment Steps
+1.  Push this code to a GitHub repository.
+2.  Import the repository in Vercel.
+3.  Add the environment variables listed above.
+4.  Click "Deploy".
+
+## Build Settings
+*   **Framework Preset**: Next.js (Default)
+*   **Build Command**: `next build` (Default)
+*   **Install Command**: `npm install` (Default)

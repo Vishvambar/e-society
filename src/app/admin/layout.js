@@ -2,9 +2,11 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 
 export default function AdminLayout({ children }) {
     const pathname = usePathname();
+    const [isSidebarOpen, setSidebarOpen] = useState(false);
 
     const navItems = [
         { label: 'Dashboard', href: '/admin/dashboard' },
@@ -17,7 +19,18 @@ export default function AdminLayout({ children }) {
 
     return (
         <div className="dashboard-layout">
-            <aside className="sidebar">
+            {/* Mobile Header */}
+            <header className="mobile-header">
+                <span style={{ fontWeight: 700 }}>Admin Config</span>
+                <button
+                    className="mobile-toggle"
+                    onClick={() => setSidebarOpen(!isSidebarOpen)}
+                >
+                    ☰
+                </button>
+            </header>
+
+            <aside className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
                 <div className="sidebar-header">
                     Admin Config
                 </div>
@@ -27,6 +40,7 @@ export default function AdminLayout({ children }) {
                             key={item.href}
                             href={item.href}
                             className={`nav-item ${pathname === item.href ? 'active' : ''}`}
+                            onClick={() => setSidebarOpen(false)}
                         >
                             {item.label}
                         </Link>
@@ -37,6 +51,15 @@ export default function AdminLayout({ children }) {
                     </Link>
                 </nav>
             </aside>
+
+            {/* Overlay */}
+            {isSidebarOpen && (
+                <div
+                    style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 45 }}
+                    onClick={() => setSidebarOpen(false)}
+                />
+            )}
+
             <main className="main-content">
                 {children}
             </main>

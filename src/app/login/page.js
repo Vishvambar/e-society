@@ -47,7 +47,7 @@ export default function LoginPage() {
             justifyContent: 'center',
             backgroundColor: 'hsl(var(--background))'
         }}>
-            <div className="card" style={{ width: '100%', padding: '5rem', maxWidth: '400px', margin: '1rem' }}>
+            <div className="card login-card" style={{ width: '100%', maxWidth: '400px', padding: '5rem' }}>
                 <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
                     <h1 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>Welcome Back</h1>
                     <p style={{ color: 'hsl(var(--muted-foreground))' }}>Sign in to your account</p>
@@ -100,7 +100,7 @@ export default function LoginPage() {
                     </button>
                 </form>
                 <div style={{ marginTop: '1.5rem', textAlign: 'center', fontSize: '0.875rem', color: 'hsl(var(--muted-foreground))' }}>
-                    Don't have an account? <span style={{ color: 'hsl(var(--primary))' }}>Ask your Admin.</span>
+                    Don&apos;t have an account? <span style={{ color: 'hsl(var(--primary))' }}>Ask your Admin.</span>
                 </div>
             </div>
         </div>

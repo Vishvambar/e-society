@@ -56,7 +56,7 @@ export default async function ResidentComplaintsPage() {
                     </div>
                 ))}
                 {complaints.length === 0 && (
-                    <div style={{ textAlign: 'center', padding: '3rem', color: 'hsl(var(--muted-foreground))' }}>You haven't raised any complaints.</div>
+                    <div style={{ textAlign: 'center', padding: '3rem', color: 'hsl(var(--muted-foreground))' }}>You haven&apos;t raised any complaints.</div>
                 )}
             </div>
         </div>
