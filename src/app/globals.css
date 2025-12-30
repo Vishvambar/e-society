@@ -1,27 +1,52 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* Design Specification: Trust-Based Blue Theme */
+  /* Using HSL values to maintain compatibility with existing `hsl(var(...))` usages */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+  /* Primary Blue #0056b3 -> hsl(211, 100%, 35%) */
+  --primary: 211 100% 35%;
+  --primary-foreground: 0 0% 100%;
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
+  /* Action Green #28a745 -> hsl(134, 61%, 41%) */
+  /* Mapping to --secondary for "Success" or creating new var? 
+     Existing code uses secondary/accent. Let's map accordingly.
+     The spec says Primary Blue is for Main Navbar/Precision. 
+     Action Green is for Check-In/Paid. */
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --success: 134 61% 41%;
+  --success-foreground: 0 0% 100%;
+
+  /* Alert Red #dc3545 -> hsl(354, 70%, 54%) */
+  --destructive: 354 70% 54%;
+  --destructive-foreground: 0 0% 100%;
+
+  /* Background #f8f9fa -> hsl(210, 17%, 98%) */
+  --background: 210 17% 98%;
+  --foreground: 210 11% 23%;
+  /* Text Dark #343a40 */
+
+  /* Accent (Reuse Primary or slightly lighter? Spec says Blue is #0056b3. Let's keep Accent close or same) */
+  --accent: 211 100% 35%;
+  --accent-foreground: 0 0% 100%;
+
+  /* Card White #ffffff */
+  --card: 0 0% 100%;
+  --card-foreground: 210 11% 23%;
+
+  /* Soft borders #ced4da -> hsl(210, 14%, 83%) */
+  --border: 210 14% 83%;
+  --input: 210 14% 83%;
+
+  --muted: 210 17% 96%;
+  --muted-foreground: 210 10% 40%;
+
+  /* Typography */
+  --font-heading: 'Segoe UI', 'Roboto', sans-serif;
+  --font-body: 'Segoe UI', 'Roboto', sans-serif;
+  --font-mono: 'Courier New', monospace;
+
+  /* Components */
+  --radius: 5px;
+  /* Spec: slightly rounded 5px */
 }
 
 * {
@@ -30,13 +55,155 @@ body {
   margin: 0;
 }
 
+body {
+  color: hsl(var(--foreground));
+  background: hsl(var(--background));
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  font-size: 16px;
+  /* Spec: 16px */
+}
+
+/* Typography Utilities */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: hsl(var(--foreground));
+  /* Spec: #343a40 */
+}
+
 a {
   color: inherit;
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+/* Button & interactive Reset */
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* Utility Classes matching Design System */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+.btn-primary:hover {
+  filter: brightness(0.9);
+  /* Spec: slightly darker */
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid hsl(var(--primary));
+  color: hsl(var(--primary));
+}
+
+.btn-danger {
+  background-color: hsl(var(--destructive));
+  color: hsl(var(--destructive-foreground));
+}
+
+.btn-success {
+  background-color: hsl(var(--success));
+  color: hsl(var(--success-foreground));
+}
+
+/* Cards */
+.card {
+  background-color: hsl(var(--card));
+  color: hsl(var(--card-foreground));
+  border: none;
+  /* Spec doesn't imply border, just shadow. But let's keep it clean. */
+  border-radius: var(--radius);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Spec: soft shadow */
+  padding: 1.5rem;
+}
+
+/* Inputs */
+input,
+select,
+textarea {
+  border: 1px solid hsl(var(--input));
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-size: 1rem;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 2px rgba(0, 86, 179, 0.2);
+  /* Glow Blue */
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+/* Data Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  text-align: left;
+  padding: 1rem;
+  background-color: #fff;
+  border-bottom: 2px solid hsl(var(--border));
+  font-weight: 700;
+}
+
+tbody tr {
+  background-color: #fff;
+  /* Row 1 White */
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+  /* Row 2 Very Light Grey */
+}
+
+td {
+  padding: 1rem;
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+/* Utility for monospace data */
+.font-mono {
+  font-family: var(--font-mono);
 }

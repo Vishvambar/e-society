@@ -1,0 +1,43 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - button "Open Next.js Dev Tools" [ref=e7] [cursor=pointer]:
+    - img [ref=e8]
+  - alert [ref=e11]
+  - generic [ref=e12]:
+    - banner [ref=e13]:
+      - heading "Gatekeeper" [level=2] [ref=e14]
+      - navigation [ref=e15]:
+        - link "Visitor Entry" [ref=e16] [cursor=pointer]:
+          - /url: /security/entry
+        - link "Check-Out" [ref=e17] [cursor=pointer]:
+          - /url: /security/active
+        - link "Emergency" [ref=e18] [cursor=pointer]:
+          - /url: /security/emergency
+      - button "Logout" [ref=e20] [cursor=pointer]
+    - main [ref=e21]:
+      - generic [ref=e22]:
+        - heading "New Visitor Entry" [level=1] [ref=e23]
+        - generic [ref=e25]:
+          - generic [ref=e26]:
+            - generic [ref=e27]: Visitor Name
+            - textbox [ref=e28]: John Visitor
+          - generic [ref=e29]:
+            - generic [ref=e30]:
+              - generic [ref=e31]: Mobile Number
+              - textbox [ref=e32]: "9876543210"
+            - generic [ref=e33]:
+              - generic [ref=e34]: Dst Flat No
+              - textbox [active] [ref=e35]: A-101
+          - generic [ref=e36]:
+            - generic [ref=e37]: Purpose
+            - combobox [ref=e38]:
+              - option "Select Purpose" [selected]
+              - option "Guest"
+              - option "Delivery"
+              - option "Maintenance"
+              - option "Cab"
+              - option "Other"
+          - button "Log Entry" [ref=e39] [cursor=pointer]
+```
