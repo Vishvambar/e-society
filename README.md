@@ -6,20 +6,6 @@
 
 > **A comprehensive web-based solution to digitize housing society operations, streamline visitor tracking, and automate billing.**
 
----
-
-## 📸 Screenshots
-*(Don't lie—visuals sell. Replace these links with your actual screenshot paths)*
-
-| **Login Page** | **Admin Dashboard** |
-|:---:|:---:|
-| ![Login](./screenshots/login.png) | ![Dashboard](./screenshots/dashboard.png) |
-
-| **Visitor Entry (Watchman)** | **Mobile View** |
-|:---:|:---:|
-| ![Visitor](./screenshots/visitor.png) | ![Mobile](./screenshots/mobile.png) |
-
----
 
 ## 🚀 Features
 
