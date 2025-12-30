@@ -1,62 +1,45 @@
+'use client';
+
 import Link from 'next/link';
-import LogoutButton from '@/components/LogoutButton';
+import { usePathname } from 'next/navigation';
 
 export default function AdminLayout({ children }) {
+    const pathname = usePathname();
+
+    const navItems = [
+        { label: 'Dashboard', href: '/admin/dashboard' },
+        { label: 'Members', href: '/admin/members' },
+        { label: 'Billing', href: '/admin/billing' },
+        { label: 'Complaints', href: '/admin/complaints' },
+        { label: 'Notices', href: '/admin/notices' },
+        { label: 'Visitors', href: '/admin/visitors' },
+    ];
+
     return (
-        <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: '#f8fafc' }}>
-            {/* Sidebar */}
-            <aside style={{
-                width: '250px',
-                background: 'hsl(var(--card))',
-                borderRight: '1px solid hsl(var(--border))',
-                padding: '1.5rem',
-                display: 'flex',
-                flexDirection: 'column',
-                position: 'fixed',
-                height: '100vh',
-                left: 0,
-                top: 0
-            }}>
-                <div style={{ marginBottom: '2rem', paddingBottom: '1rem', borderBottom: '1px solid hsl(var(--border))' }}>
-                    <h2 style={{ fontSize: '1.25rem', fontWeight: '700' }}>Society Admin</h2>
-                    <p style={{ fontSize: '0.875rem', color: 'hsl(var(--muted-foreground))' }}>Management Portal</p>
+        <div className="dashboard-layout">
+            <aside className="sidebar">
+                <div className="sidebar-header">
+                    Admin Config
                 </div>
-
-                <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flex: 1 }}>
-                    <SidebarLink href="/admin/dashboard" label="Dashboard" />
-                    <SidebarLink href="/admin/members" label="Members" />
-                    <SidebarLink href="/admin/notices" label="Notices" />
-                    <SidebarLink href="/admin/complaints" label="Complaints" />
-                    <SidebarLink href="/admin/billing" label="Billing" />
-                    <SidebarLink href="/admin/visitors" label="Visitor Logs" />
+                <nav className="sidebar-nav">
+                    {navItems.map((item) => (
+                        <Link
+                            key={item.href}
+                            href={item.href}
+                            className={`nav-item ${pathname === item.href ? 'active' : ''}`}
+                        >
+                            {item.label}
+                        </Link>
+                    ))}
+                    <div style={{ flex: 1 }}></div>
+                    <Link href="/login" className="nav-item">
+                        Logout
+                    </Link>
                 </nav>
-
-                <div style={{ marginTop: 'auto', borderTop: '1px solid hsl(var(--border))', paddingTop: '1rem' }}>
-                    <LogoutButton />
-                </div>
             </aside>
-
-            {/* Main Content */}
-            <main style={{ flex: 1, padding: '2rem', marginLeft: '250px' }}>
-                <div className="container">
-                    {children}
-                </div>
+            <main className="main-content">
+                {children}
             </main>
         </div>
-    );
-}
-
-function SidebarLink({ href, label }) {
-    return (
-        <Link href={href} style={{
-            display: 'block',
-            padding: '0.75rem 1rem',
-            borderRadius: 'var(--radius)',
-            color: 'hsl(var(--foreground))',
-            transition: 'background-color 0.2s',
-            fontWeight: 500
-        }} className="hover:bg-slate-100">
-            {label}
-        </Link>
     );
 }

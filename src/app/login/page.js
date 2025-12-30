@@ -7,11 +7,13 @@ export default function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
+        setLoading(true);
 
         try {
             const res = await fetch('/api/auth/login', {
@@ -29,45 +31,77 @@ export default function LoginPage() {
                 else router.push('/resident/dashboard');
             } else {
                 setError(data.error);
+                setLoading(false);
             }
         } catch (err) {
             setError('An error occurred. Please try again.');
+            setLoading(false);
         }
     };
 
     return (
-        <div className="container" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div className="card" style={{ maxWidth: '400px', width: '100%' }}>
-                <h1 style={{ marginBottom: '1.5rem', textAlign: 'center' }}>Sign In</h1>
-                {error && <div style={{ color: 'hsl(var(--destructive))', marginBottom: '1rem', textAlign: 'center' }}>{error}</div>}
+        <div style={{
+            minHeight: '100vh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: 'hsl(var(--background))'
+        }}>
+            <div className="card" style={{ width: '100%', padding: '5rem', maxWidth: '400px', margin: '1rem' }}>
+                <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+                    <h1 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>Welcome Back</h1>
+                    <p style={{ color: 'hsl(var(--muted-foreground))' }}>Sign in to your account</p>
+                </div>
+
+                {error && (
+                    <div style={{
+                        padding: '0.75rem',
+                        borderRadius: 'var(--radius)',
+                        backgroundColor: 'hsl(var(--destructive))',
+                        color: 'hsl(var(--destructive-foreground))',
+                        marginBottom: '1rem',
+                        fontSize: '0.875rem',
+                        textAlign: 'center'
+                    }}>
+                        {error}
+                    </div>
+                )}
+
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     <div>
-                        <label>Email</label>
+                        <label htmlFor="email">Email</label>
                         <input
+                            id="email"
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
-                            style={{ width: '100%' }}
+                            placeholder="admin@society.com"
                         />
                     </div>
                     <div>
-                        <label>Password</label>
+                        <label htmlFor="password">Password</label>
                         <input
+                            id="password"
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
-                            style={{ width: '100%' }}
+                            placeholder="••••••••"
                         />
                     </div>
-                    <button type="submit" className="btn btn-primary" style={{ marginTop: '0.5rem' }}>
-                        Login
+                    <button
+                        type="submit"
+                        className="btn btn-primary"
+                        disabled={loading}
+                        style={{ marginTop: '0.5rem', width: '100%' }}
+                    >
+                        {loading ? 'Signing in...' : 'Sign In'}
                     </button>
                 </form>
-                <p style={{ marginTop: '1rem', textAlign: 'center', fontSize: '0.875rem', color: 'hsl(var(--muted-foreground))' }}>
-                    Don't have an account? Ask your Admin.
-                </p>
+                <div style={{ marginTop: '1.5rem', textAlign: 'center', fontSize: '0.875rem', color: 'hsl(var(--muted-foreground))' }}>
+                    Don't have an account? <span style={{ color: 'hsl(var(--primary))' }}>Ask your Admin.</span>
+                </div>
             </div>
         </div>
     );

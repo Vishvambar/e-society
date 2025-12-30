@@ -1,9 +1,6 @@
 import mongoose from 'mongoose';
 
-const MONGODB_URI = 'mongodb+srv://vishvambarudavant96:YkNfIvvHrqXc67Mn@cluster0.hppib6y.mongodb.net/social-app?retryWrites=true&w=majority&appName=Cluster0';
-// const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/society-management';
-
-console.log('Attempting to connect to:', MONGODB_URI);
+const MONGODB_URI = process.env.MONGODB_URI;
 
 /**
  * Global is used here to maintain a cached connection across hot reloads
@@ -21,10 +18,17 @@ async function dbConnect() {
     return cached.conn;
   }
 
+  // Check inside function to allow build without env var (unless specific page needs it)
+  if (!MONGODB_URI) {
+    throw new Error(
+      'Please define the MONGODB_URI environment variable inside .env.local'
+    );
+  }
+
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
-      serverSelectionTimeoutMS: 5000, // Fail after 5 seconds if not connected
+      serverSelectionTimeoutMS: 5000,
     };
 
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {

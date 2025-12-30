@@ -40,50 +40,53 @@ export default function VisitorEntryPage() {
 
     return (
         <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-            <h1 style={{ marginBottom: '2rem' }}>New Visitor Entry</h1>
+            <div className="page-header">
+                <h1>New Visitor Entry</h1>
+            </div>
 
             <div className="card">
                 <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                     <div>
-                        <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem' }}>Visitor Name</label>
+                        <label>Visitor Name</label>
                         <input
                             type="text"
                             required
-                            style={{ width: '100%', padding: '0.5rem', borderRadius: 'var(--radius)', border: '1px solid hsl(var(--input))' }}
                             value={formData.name}
                             onChange={e => setFormData({ ...formData, name: e.target.value })}
+                            placeholder="John Doe"
                         />
                     </div>
 
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                         <div>
-                            <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem' }}>Mobile Number</label>
+                            <label>Mobile Number</label>
                             <input
                                 type="tel"
                                 required
-                                style={{ width: '100%', padding: '0.5rem', borderRadius: 'var(--radius)', border: '1px solid hsl(var(--input))' }}
+                                className="font-mono"
                                 value={formData.mobile}
                                 onChange={e => setFormData({ ...formData, mobile: e.target.value })}
+                                placeholder="9876543210"
                             />
                         </div>
                         <div>
-                            <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem' }}>Dst Flat No</label>
+                            <label>Dst Flat No</label>
                             <input
                                 type="text"
                                 required
-                                style={{ width: '100%', padding: '0.5rem', borderRadius: 'var(--radius)', border: '1px solid hsl(var(--input))' }}
                                 value={formData.flatNo}
                                 onChange={e => setFormData({ ...formData, flatNo: e.target.value })}
+                                placeholder="A-101"
                             />
                         </div>
                     </div>
 
                     <div>
-                        <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.875rem' }}>Purpose</label>
+                        <label>Purpose</label>
                         <select
-                            style={{ width: '100%', padding: '0.5rem', borderRadius: 'var(--radius)', border: '1px solid hsl(var(--input))' }}
                             value={formData.purpose}
                             onChange={e => setFormData({ ...formData, purpose: e.target.value })}
+                            required
                         >
                             <option value="">Select Purpose</option>
                             <option value="Guest">Guest</option>
@@ -94,7 +97,14 @@ export default function VisitorEntryPage() {
                         </select>
                     </div>
 
-                    <button type="submit" className="btn btn-primary" style={{ marginTop: '1rem' }} disabled={loading}>{loading ? 'Logging...' : 'Log Entry'}</button>
+                    <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+                        <button type="submit" className="btn btn-primary" style={{ flex: 1 }} disabled={loading}>
+                            {loading ? 'Logging...' : 'Log Entry'}
+                        </button>
+                        <button type="button" className="btn btn-outline" onClick={() => router.push('/security/active')}>
+                            View Active
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>

@@ -26,7 +26,12 @@ export default async function AdminDashboard() {
 
     return (
         <div>
-            <h1 style={{ marginBottom: '2rem' }}>Dashboard Overview</h1>
+            <div className="page-header">
+                <h1>Dashboard Overview</h1>
+                <div className="text-sm text-muted">
+                    Welcome back, Admin
+                </div>
+            </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem' }}>
                 <StatCard title="Total Residents" value={stats.totalResidents} />
