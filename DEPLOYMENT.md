@@ -6,7 +6,6 @@ This project is ready for deployment on Vercel.
 You MUST configure the following environment variables in your Vercel Project Settings:
 
 1.  **MONGODB_URI**: Your MongoDB connection string.
-    *   Example: `mongodb+srv://user:pass@cluster.mongodb.net/dbname`
     *   *Note: Ensure "Access from anywhere" (0.0.0.0/0) is enabled in MongoDB Atlas Network Access, as Vercel IP addresses are dynamic.*
 
 2.  **JWT_SECRET**: A strong random string for signing tokens.
